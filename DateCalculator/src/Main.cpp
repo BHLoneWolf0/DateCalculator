@@ -18,7 +18,7 @@ void setDate() {
 
 	std::cout << "========================================================================\n";
 }
-
+//I can't think of a good name
 void getStuff() {
 
 	std::cout << "(1)After the Date \n(2)Before the Date\n";
