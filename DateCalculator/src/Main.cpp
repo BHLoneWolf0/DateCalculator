@@ -49,11 +49,11 @@ int main() {
 		std::cout << "Enter how many years:";
 		std::cin >> changeDate;
 		if (beforeOrAfter == 1) {
-			year += std::chrono::years{changeDate};
+			year += std::chrono::years(changeDate);
 			std::cout << day << "/" << month << "/" << year;
 		}
 		else if (beforeOrAfter == 2) {
-			year -= std::chrono::years{changeDate};
+			year -= std::chrono::years(changeDate );
 			std::cout << day << "/" << month << "/" << year;
 		}
 		break;
@@ -63,31 +63,34 @@ int main() {
 		std::cin >> changeDate;
 
 		if (beforeOrAfter == 1) {
-			month += std::chrono::months{changeDate};
+			month += std::chrono::months(changeDate);
+			if (month >= std::chrono::month(1)) {
+				year += std::chrono::years(1);
+			}
 			std::cout << day << "/" << month << "/" << year;
 		}
 		else if (beforeOrAfter == 2) {
-			month -= std::chrono::months{changeDate};
+			month -= std::chrono::months(changeDate);
 			std::cout << day << "/" << month << "/" << year;
 		}
 
 		break;
 	case 3:
+		std::cout << "THE DAY SECTION DOES NOT CALCULATE PROPERLY!!\n";
 		std::cout << "Day\n";
 		std::cout << "Enter how many days:";
-		std::cout << "THE DAY SECTION DOES NOT CALCULATE PROPERLY!!\n";
 		std::cin >> changeDate;
 
 		if (beforeOrAfter == 1) {
 			
 			if (year.is_leap()) if (day == std::chrono::day(29)) std::cout << "Leap year!\n";
 
-			day += std::chrono::days{changeDate};
+			day += std::chrono::days(changeDate);
 
-			if (day >= std::chrono::day{31}) {
-				day = std::chrono::day{ 1 } + std::chrono::days{(day - (std::chrono::day)1) % 30};
+			if (day >= std::chrono::day(31)) {
+				day = std::chrono::day(1) + std::chrono::days((day - (std::chrono::day)1) % 30);
 
-				month += std::chrono::months{((std::chrono::months)changeDate / 30)};
+				month += std::chrono::months(changeDate / 30);
 			}
 			std::cout << day << "/" << month << "/" << year;
 		}
@@ -95,14 +98,14 @@ int main() {
 		else if (beforeOrAfter == 2) {
 			if (year.is_leap()) if (day == std::chrono::day(29)) std::cout << "Leap year! ";
 			
-			day -= std::chrono::days{changeDate};
+				day -= std::chrono::days(changeDate);
 		
-			if (day >= std::chrono::day{200}) {
-				day += std::chrono::days{30};
+			if (day >= std::chrono::day(200)) {
+				day += std::chrono::days(30);
 				month--;
 			}
-			else if (month <= std::chrono::month{0}) {
-				month = std::chrono::month{ 12 };
+			else if (month <= std::chrono::month(0)){
+				month = std::chrono::month(12);
 			}
 			
 			std::cout << day << "/" << month << "/" << year;
